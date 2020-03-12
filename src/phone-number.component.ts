@@ -62,13 +62,13 @@ export class PhoneNumberComponent
 
     // optionally format output model with a space between country code and phone number
     @Input() countryCodeSpace: boolean = true;
-    
+
     // optionally suppress the +1 for US phones
     @Input() noUSCountryCode: boolean = true;
 
     // Set true if you want the model touched upon any change, rather than just when valid or blurred.
     @Input() autoTouch: boolean = false;
-    
+
     @Output() onCountryCodeChanged: EventEmitter<any> = new EventEmitter();
 
     // ELEMENT REF
@@ -86,6 +86,7 @@ export class PhoneNumberComponent
     phoneNumberOnly = ''; //separating the phone from the country dial code
     hasAreaCodeParenthesis = false; // try to format output as before
     hasDashes = false; // try to format output as before
+    replaceRegexp = /(?!\+)(\D)/g;
 
     value = '';
 
@@ -293,11 +294,11 @@ export class PhoneNumberComponent
         if (PhoneNumberComponent.startsWithPlus(this.phoneNumber)){
             let space = this.phoneNumber.indexOf(' ');
             this.phoneNumberOnly = this.phoneNumber.substring(space, this.phoneNumber.length);
-            this.phoneNumberOnly = this.phoneNumberOnly.replace(/\D/g, "");
+            this.phoneNumberOnly = this.phoneNumberOnly.replace(this.replaceRegexp, "");
         }
         // otherwise read the 10 digit domestic phone
         else {
-            this.phoneNumberOnly = this.phoneNumber.replace(/\D/g, "");
+            this.phoneNumberOnly = this.phoneNumber.replace(this.replaceRegexp, "");
             this.phoneNumberOnly = this.phoneNumberOnly.substring(this.phoneNumberOnly.length - 10, this.phoneNumberOnly.length);
         }
     }
@@ -313,15 +314,15 @@ export class PhoneNumberComponent
             phoneEmptyError: {
                 valid: false // maintaining this to be backward compatible with prior versions
             },
-            required: this.formattedPhone().replace(/\D/g, "").length < 1, // this is a more standard error flag
+            required: this.formattedPhone().replace(this.replaceRegexp, "").length < 1, // this is a more standard error flag
             pattern: false
         };
 
         // strip out stuff like (,),-
         let digits;
         if(value)
-            digits = value.replace(/\D/g, "");
-        if (this.formattedPhone().replace(/\D/g, "").length < 1) {
+            digits = value.replace(this.replaceRegexp, "");
+        if (this.formattedPhone().replace(this.replaceRegexp, "").length < 1) {
             if(this.required){
                 validationError.phoneEmptyError.valid = true;
                 validationError.required = true;
@@ -364,12 +365,12 @@ export class PhoneNumberComponent
         if(this.selectedCountry.countryCode == 'us' && this.noUSCountryCode)
             dialCode = '';
         else
-            dialCode = '+'+this.dialCode;    
+            dialCode = '+'+this.dialCode;
         if(this.countryCodeSpace)
             temp = dialCode+' '+this.formattedPhone();
         else
             temp = dialCode+this.formattedPhone();
-        
+
         this.onModelChange(temp);
         if(this.autoTouch)
             this.onTouch();
@@ -377,12 +378,12 @@ export class PhoneNumberComponent
 
     formattedPhone(){
         let formatted;
-        let temp = this.phoneNumberOnly.replace(/\D/g, "");        
+        let temp = this.phoneNumberOnly.replace(this.replaceRegexp, "");
         if(!this.selectedCountry || !this.isForeign())
             formatted = '(' + temp.substring(0, 3) + ') ' + temp.substring(3, 6) + '-' + temp.substring(6, temp.length);
         else
-            formatted = temp;  
-        return formatted; 
+            formatted = temp;
+        return formatted;
     }
 
     /**
@@ -399,7 +400,7 @@ export class PhoneNumberComponent
             if(this.selectedCountry.countryCode != 'us' || !this.noUSCountryCode)
                 this.dialCode = this.selectedCountry.dialCode;
             else
-                this.dialCode = null; 
+                this.dialCode = null;
         }
     }
 

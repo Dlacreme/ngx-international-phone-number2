@@ -1,7 +1,9 @@
 # ngx-international-phone-number2
-A simple international telephone number input. Allows you to create a phone number field with country dropdown. 
+A simple international telephone number input. Allows you to create a phone number field with country dropdown.
 
 This is re-re-written version (with enhancements and bug fixes) of [ngx-international-phone-number](https://github.com/nikhiln/ngx-international-phone-number) by [nikhiln](https://github.com/nikhiln), which was a re-written version of [ng4-intl-phone](https://github.com/kondi0/ng4-intl-phone/). So credit should go to [nikhiln](https://github.com/nikhiln) and [kondi0](https://github.com/kondi0).
+
+**This includes 2 new attributes: 'onchange' and 'format'**
 
 ## Enhancements
 
@@ -109,17 +111,17 @@ Once it is imported, you can use `international-phone-number2`:
 
 ### Attributes/Options:
     defaultCountryCode : An ISO 639-1 country code can be provided to set default country selected.
-       
+
     placeholder: A placeholder text which would be displayed in input widget
-    
+
     required: Indicates whether it is required or not
-    
+
     allowDropdown: Indicates whether to allow selecting country from dropdown
 
     allowedCountries: A list of countries (iso codes) that would get display in country dropdown. E.g. [allowedCountries]="['in', 'ca', 'us']" would only show Canada, India and US. If not provided, all the countries would get displayed.
 
     pattern: Regex pattern to apply to input. Defaults to a regex that enforces 10 digit numeric input as "111-111-1111"
-    
+
     countryCodeSpace: Boolean to add a space between country code and phone in model (defaults to true)
 
     noUSCountryCode: Boolean to suppress +1 country code for US numbers in model (defaults to true)
