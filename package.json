@@ -1,6 +1,7 @@
 {
-  "name": "ngx-international-phone-number2",
-  "version": "1.2.4",
+  "name": "@dlacreme/ngx-international-phone-number2-dlacreme",
+  "version": "0.0.1",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
     "build": "gulp build",
     "build:watch": "gulp",
@@ -16,18 +17,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/esoyke/ngx-international-phone-number2"
+    "url": "https://github.com/dlacreme/ngx-international-phone-number2"
   },
   "author": {
-    "name": "Eric Soyke",
-    "email": "soykes@yahoo.com"
+    "name": "Mathieu Delacroix",
+    "email": "mathieu.delacroix.fr@gmail.com"
   },
   "keywords": [
     "angular"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/esoyke/ngx-international-phone-number2/issues"
+    "url": "https://github.com/dlacreme/ngx-international-phone-number2/issues"
   },
   "devDependencies": {
     "@angular/common": "^7.2.15",
