@@ -1,5 +1,5 @@
 {
-  "name": "@dlacreme/ngx-international-phone-number2-dlacreme",
+  "name": "@dlacreme/ngx-international-phone-number",
   "version": "0.0.2",
   "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
@@ -15,7 +15,7 @@
     "playground": "concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run lite\"",
     "test": "tsc && karma start"
   },
-  "repository": {np
+  "repository": {
     "type": "git",
     "url": "https://github.com/dlacreme/ngx-international-phone-number2"
   },
